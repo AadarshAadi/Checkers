@@ -99,6 +99,8 @@ public class Main extends AppCompatActivity {
             if (toI == 1) {
                 convertToKing(toI, toJ, Color.RED);
             }
+        } else if (checkKingMove(fromI, fromJ, toI, toJ, "RED")) {
+            movePiece(fromI, fromJ, toI, toJ, Color.RED);
         }
     }
 
@@ -107,8 +109,22 @@ public class Main extends AppCompatActivity {
             if (toI == 8) {
                 convertToKing(toI, toJ, Color.BLUE);
             }
+        } else if (checkKingMove(fromI, fromJ, toI, toJ, "BLUE")) {
+            movePiece(fromI, fromJ, toI, toJ, Color.BLUE);
         }
     }
+
+    private boolean checkKingMove(int fromI, int fromJ, int toI, int toJ, String color) {
+        if (checkPositionAvailable(toI, toJ)) {
+            if (color.equals("RED") && Math.abs(toI - fromI) == 1 && Math.abs(toJ - fromJ) == 1) {
+                return true;
+            } else if (color.equals("BLUE") && Math.abs(toI - fromI) == 1 && Math.abs(toJ - fromJ) == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private boolean checkCaptureMove(int fromI, int fromJ, int toI, int toJ, String opponentColor) {
         int midI = (fromI + toI) / 2;
